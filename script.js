@@ -8,12 +8,12 @@ let next_btn = document.querySelector('.next-track');
 let prev_btn = document.querySelector('.prev-track');
 
 let seek_slider = document.querySelector('.seek_slider');
-let volume_slider = document.querySelector('.volume_slider');
-let curr_time = document.querySelector('.current-time');
-let total_duration = document.querySelector('.total-duration');
-let wave = document.getElementById('wave');
-let randomIcon = document.querySelector('.fa-random');
-let curr_track = document.createElement('audio');
+let volume_slider = document.querySelector(".volume_slider");
+let curr_time = document.querySelector(".current-time");
+let total_duration = document.querySelector(".total-duration");
+let wave = document.getElementById("wave");
+let randomIcon = document.querySelector(".fa-random");
+let curr_track = document.createElement("audio");
 
 let track_index = 0;
 let isPlaying = false;
@@ -22,32 +22,34 @@ let updateTimer;
 
 const music_list = [
     {
-        img : 'images/stay.png',
-        name : 'Stay',
-        artist : 'The Kid LAROI, Justin Bieber',
-        music : 'music/stay.mp3'
+        img: 'images/stay.png',
+        name: 'Stay',
+        artist: 'The Kid LAROI, Justin Bieber',
+        music: 'music/stay.mp3'
     },
     {
-        img : 'images/fallingdown.jpg',
-        name : 'Falling Down',
-        artist : 'Wid Cards',
-        music : 'music/fallingdown.mp3'
+        img: "images/fallingdown.jpg",
+        name: 'Falling Down',
+        artist: 'Wid Cards',
+        music: 'music/fallingdown.mp3'
     },
     {
-        img : 'images/faded.png',
-        name : 'Faded',
-        artist : 'Alan Walker',
-        music : 'music/Faded.mp3'
+        img: 'images/faded.png',
+        name: 'Faded',
+        artist: 'Alan Walker',
+        music: 'music/Faded.mp3'
     },
     {
-        img : 'images/ratherbe.jpg',
-        name : 'Rather Be',
-        artist : 'Clean Bandit',
-        music : 'music/Rather Be.mp3'
+        img: 'images/ratherbe.jpg',
+        name: 'Rather Be',
+        artist: 'Clean Bandit',
+        music: 'music/Rather Be.mp3'
     }
 ];
 
+
 loadTrack(track_index);
+
 
 function loadTrack(track_index){
     clearInterval(updateTimer);
@@ -67,56 +69,80 @@ function loadTrack(track_index){
     random_bg_color();
 }
 
-function random_bg_color(){
-    let hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e'];
+
+function random_bg_color() {
+    let hex = [
+        "0",
+        "1",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+    ];
     let a;
 
-    function populate(a){
-        for(let i=0; i<6; i++){
+    function populate(a) {
+        for (let i=0; i<6; i++) {
             let x = Math.round(Math.random() * 14);
             let y = hex[x];
             a += y;
         }
         return a;
     }
-    let Color1 = populate('#');
-    let Color2 = populate('#');
+    let Color1 = populate("#");
+    let Color2 = populate("#");
     var angle = 'to right';
 
-    let gradient = 'linear-gradient(' + angle + ',' + Color1 + ', ' + Color2 + ")";
-    document.body.style.background = gradient;
+    let gradinet =
+        'linear-gradient(' + angle + "," + Color1 + "," + Color2 + ")";
+    document.body.style.background = gradinet;
 }
+
 function reset(){
     curr_time.textContent = "00:00";
     total_duration.textContent = "00:00";
     seek_slider.value = 0;
 }
-function randomTrack(){
+function randomTrack() {
     isRandom ? pauseRandom() : playRandom();
 }
-function playRandom(){
+
+function playRandom() {
     isRandom = true;
-    randomIcon.classList.add('randomActive');
+    randomIcon.classList.add("randomActive");
 }
-function pauseRandom(){
+
+function pauseRandom() {
     isRandom = false;
-    randomIcon.classList.remove('randomActive');
+    randomIcon.classList.remove("randomActive");
 }
-function repeatTrack(){
+
+function repeatTrack() {
     let current_index = track_index;
     loadTrack(current_index);
     playTrack();
 }
-function playpauseTrack(){
+
+function playpauseTrack() {
     isPlaying ? pauseTrack() : playTrack();
 }
-function playTrack(){
+
+function playTrack() {
     curr_track.play();
     isPlaying = true;
     track_art.classList.add('rotate');
-    wave.classList.add('loader');
+    wave.classList.add("loader");
     playpause_btn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
 }
+
 function pauseTrack(){
     curr_track.pause();
     isPlaying = false;
@@ -169,6 +195,6 @@ function setUpdate(){
         if(durationMinutes < 10) { durationMinutes = "0" + durationMinutes; }
 
         curr_time.textContent = currentMinutes + ":" + currentSeconds;
-        total_duration.textContent = durationMinutes + ":" + durationSeconds;
+        total_duration.textContent = durationMinutes + ":" + durationMinutes;
     }
 }
